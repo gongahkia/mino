@@ -6,11 +6,10 @@
 
 ## Stack
 
-* *Script*: [Python]()
-* *Dependancies*: []()
-* *Graphics API*: []()
-* *Package*: [Docker]()
-* *Test*: []()
+* *Script*: [Python](https://www.python.org/)
+* *Dependencies*: [Pygame](https://www.pygame.org/news), [NumPy](https://numpy.org/)
+* *Package*: [Docker](https://www.docker.com/)
+* *Test*: [Pytest](https://docs.pytest.org/en/stable/)
 
 ## Usage
 
