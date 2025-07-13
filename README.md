@@ -6,7 +6,11 @@
 
 ## Stack
 
+* *Script*: [Python]()
+* *Dependancies*: []()
 * **: []()
+* **: []()
+* *Package*: [Docker]()
 
 ## Usage
 
