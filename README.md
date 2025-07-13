@@ -2,7 +2,7 @@
 
 # `Mino`
 
-A minimal 3D voxel modeling *(visualization and animation)* tool with real-time rendering and a modular, scriptable API.
+A minimal Voxel Modeling, Visualization and Animation tool with real-time rendering and a scriptable API.
 
 ## Stack
 
