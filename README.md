@@ -186,3 +186,5 @@ flowchart TD
 ## Reference
 
 The name `Mino` is shorthand for "Minus One", referring to `Mino`'s handling of ...
+
+zero-based voxel coordinates and minimalism in both interface and code. The concept emphasizes operating from an origin point—often at (0, 0, 0)—and building models incrementally, where each voxel’s position is relative to this minimal starting point. This philosophy is reflected throughout the tool’s design: simple controls, a lightweight codebase, and a focus on the essentials of 3D voxel modeling.
