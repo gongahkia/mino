@@ -192,4 +192,4 @@ flowchart TD
 
 ## Reference
 
-The name `Mino` is shorthand for "Minus One", loosely referring to `Mino`'s employment of [Voxel Coordinate Compression](https://eisenwave.github.io/voxel-compression-docs/), specifically [SVO](https://en.wikipedia.org/wiki/Sparse_voxel_octree) and [RLE](https://en.wikipedia.org/wiki/Run-length_encoding).
+The name `Mino` is shorthand for "Minus One", loosely referring to `Mino`'s employment of [Voxel Coordinate Compression](https://eisenwave.github.io/voxel-compression-docs/), specifically [SVO](https://en.wikipedia.org/wiki/Sparse_voxel_octree) and [RLE](https://en.wikipedia.org/wiki/Run-length_encoding). `Mino` also happens to be one character away from "Mini", which is a [happy coincidence](https://www.collinsdictionary.com/dictionary/english/happy-coincidence).
