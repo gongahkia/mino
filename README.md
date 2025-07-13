@@ -25,15 +25,15 @@ $ git clone https://github.com/gongahkia/Mino && cd Mino
 2. Build and run Docker Image for [Production](./Dockerfile).
 
 ```console
-docker build -t mino-prod -f Dockerfile .
-docker run --rm -it -p 8000:8000 mino-prod
+$ docker build -t mino-prod -f Dockerfile .
+$ docker run --rm -it -p 8000:8000 mino-prod
 ```
 
 3. Build and run Docker Image for [Development](./Dockerfile.dev).
 
 ```console
-docker build -t mino-dev -f Dockerfile.dev .
-docker run --rm -it -v $(pwd):/app -p 8000:8000 mino-dev
+$ docker build -t mino-dev -f Dockerfile.dev .
+$ docker run --rm -it -v $(pwd):/app -p 8000:8000 mino-dev
 ```
 
 ## Architecture
