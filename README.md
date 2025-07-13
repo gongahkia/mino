@@ -8,23 +8,29 @@
 
 * *Script*: [Python]()
 * *Dependancies*: []()
-* **: []()
-* **: []()
+* *Graphics API*: []()
 * *Package*: [Docker]()
 * *Test*: []()
 
 ## Usage
 
-...
 
-Build and run [Docker Image]() for [Production]().
+The below instructions are for running `Mino` on your client machine.
+
+1. Execute the below.
+
+```console
+$ git clone https://github.com/gongahkia/Mino && cd Mino
+```
+
+2. Build and run Docker Image for [Production](./Dockerfile).
 
 ```console
 docker build -t mino-prod -f Dockerfile .
 docker run --rm -it -p 8000:8000 mino-prod
 ```
 
-Build and run [Docker Image]() for [Development].
+3. Build and run Docker Image for [Development](./Dockerfile.dev).
 
 ```console
 docker build -t mino-dev -f Dockerfile.dev .
