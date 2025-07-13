@@ -17,6 +17,20 @@
 
 ...
 
+Build and run [Docker Image]() for [Production]().
+
+```console
+docker build -t mino-prod -f Dockerfile .
+docker run --rm -it -p 8000:8000 mino-prod
+```
+
+Build and run [Docker Image]() for [Development].
+
+```console
+docker build -t mino-dev -f Dockerfile.dev .
+docker run --rm -it -v $(pwd):/app -p 8000:8000 mino-dev
+```
+
 ## Architecture
 
 ```mermaid
