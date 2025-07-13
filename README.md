@@ -36,6 +36,13 @@ $ docker build -t mino-dev -f Dockerfile.dev .
 $ docker run --rm -it -v $(pwd):/app -p 8000:8000 mino-dev
 ```
 
+4. Build and run [Unit Tests](./tests/).
+
+```console
+$ docker build -t mino-dev -f Dockerfile.dev .
+$ docker run --rm -it -v $(pwd):/app mino-dev pytest tests/
+```
+
 ## Architecture
 
 ```mermaid
@@ -185,6 +192,4 @@ flowchart TD
 
 ## Reference
 
-The name `Mino` is shorthand for "Minus One", referring to `Mino`'s handling of ...
-
-zero-based voxel coordinates and minimalism in both interface and code. The concept emphasizes operating from an origin point—often at (0, 0, 0)—and building models incrementally, where each voxel’s position is relative to this minimal starting point. This philosophy is reflected throughout the tool’s design: simple controls, a lightweight codebase, and a focus on the essentials of 3D voxel modeling.
+The name `Mino` is shorthand for "Minus One", loosely referring to `Mino`'s employment of Voxel Coordinate Compression, specifically [SVO](https://en.wikipedia.org/wiki/Sparse_voxel_octree) and [RLE](https://en.wikipedia.org/wiki/Run-length_encoding).
