@@ -26,21 +26,21 @@ The below instructions are for running `Mino` CLI on your client machine.
 $ git clone https://github.com/gongahkia/Mino && cd Mino/cli
 ```
 
-2. Build and run Docker Image for [Production](./Dockerfile).
+2. Build and run a Docker Image for [Production](./cli/Dockerfile).
 
 ```console
 $ docker build -t mino-prod -f Dockerfile .
 $ docker run --rm -it -p 8000:8000 mino-prod
 ```
 
-3. Build and run Docker Image for [Development](./Dockerfile.dev).
+3. Build and run a Docker Image for [Development](./cli/Dockerfile.dev).
 
 ```console
 $ docker build -t mino-dev -f Dockerfile.dev .
 $ docker run --rm -it -v $(pwd):/app -p 8000:8000 mino-dev
 ```
 
-4. Build and run [Unit Tests](./tests/).
+4. Build and run [Unit Tests](./cli/tests/).
 
 ```console
 $ docker build -t mino-dev -f Dockerfile.dev .
@@ -55,7 +55,15 @@ $ docker run --rm -it -v $(pwd):/app mino-dev pytest tests/
 $ git clone https://github.com/gongahkia/Mino && cd Mino/web
 ```
 
-...
+2. Build and run a Docker Image for [both](./web/docker-compose.yml) the Frontend and the Backend.
+
+```console
+$ docker-compose build
+$ docker-compose up
+$ docker-compose up --build
+```
+
+3. Access the [Frontend](./web/frontend/) at [localhost:3000](http://localhost:3000) and the [Backend](./web/backend/) at [localhost:4000](http://localhost:4000).
 
 ## Architecture
 
