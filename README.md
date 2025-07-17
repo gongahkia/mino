@@ -3,13 +3,13 @@
 
 # `Mino`
 
-A minimal Voxel Modeling, Visualization and Animation tool with real-time rendering and a scriptable API.
+A minimal Voxel Modeling, Visualization and Animation tool with real-time rendering and a scriptable API, served as a [CLI tool](#cli-1) and [Web App](#web-app-1).
 
 ## Stack
 
 * *Script*: [Python](https://www.python.org/)
-* *Frontend*: [React](), [TypeScript](), [HTML Canvas API]()
-* *Backend*: [Node.js](), [JavaScript]()
+* *Frontend*: [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [HTML Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+* *Backend*: [Node.js](https://nodejs.org/en), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * *Dependencies*: [Pygame](https://www.pygame.org/news), [NumPy](https://numpy.org/)
 * *Package*: [Docker](https://www.docker.com/)
 * *Test*: [Pytest](https://docs.pytest.org/en/stable/)
@@ -26,21 +26,21 @@ The below instructions are for running `Mino` CLI on your client machine.
 $ git clone https://github.com/gongahkia/Mino && cd Mino/cli
 ```
 
-2. Build and run Docker Image for [Production](./Dockerfile).
+2. Build and run a Docker Image for [Production](./cli/Dockerfile).
 
 ```console
 $ docker build -t mino-prod -f Dockerfile .
 $ docker run --rm -it -p 8000:8000 mino-prod
 ```
 
-3. Build and run Docker Image for [Development](./Dockerfile.dev).
+3. Build and run a Docker Image for [Development](./cli/Dockerfile.dev).
 
 ```console
 $ docker build -t mino-dev -f Dockerfile.dev .
 $ docker run --rm -it -v $(pwd):/app -p 8000:8000 mino-dev
 ```
 
-4. Build and run [Unit Tests](./tests/).
+4. Build and run [Unit Tests](./cli/tests/).
 
 ```console
 $ docker build -t mino-dev -f Dockerfile.dev .
@@ -55,7 +55,15 @@ $ docker run --rm -it -v $(pwd):/app mino-dev pytest tests/
 $ git clone https://github.com/gongahkia/Mino && cd Mino/web
 ```
 
-...
+2. Build and run a Docker Image for [both](./web/docker-compose.yml) the Frontend and the Backend.
+
+```console
+$ docker-compose build
+$ docker-compose up
+$ docker-compose up --build
+```
+
+3. Access the [Frontend](./web/frontend/) at [localhost:3000](http://localhost:3000) and the [Backend](./web/backend/) at [localhost:4000](http://localhost:4000).
 
 ## Architecture
 
@@ -206,10 +214,103 @@ flowchart TD
   UI_Module -.-> Icons
 ```
 
-### Web
+### Web App
 
 ```Mermaid
+flowchart TD
+  %% --- FRONTEND ---
+  subgraph Web_Frontend["Frontend (React/TypeScript)"]
+    AppComponent["App.tsx (Main UI/App State)"]
 
+    subgraph UI_Components["components/"]
+      Canvas3D["Canvas3D.tsx (3D Voxel Viewer)"]
+      ColorPicker["ColorPicker.tsx"]
+      Toolbar["Toolbar.tsx"]
+    end
+
+    subgraph Utilities["utils/"]
+      FrontHelpers["helpers.ts (Color/Helpers)"]
+    end
+
+    subgraph Services["services/"]
+      ApiClient["apiClient.ts (REST Client)"]
+    end
+
+    subgraph Workers["workers/"]
+      CompressWorker["compressionWorker.ts (RLE/SVO Workers)"]
+    end
+
+    AppComponent --> Canvas3D
+    AppComponent --> ColorPicker
+    AppComponent --> Toolbar
+    AppComponent --> ApiClient
+    AppComponent --> CompressWorker
+    Canvas3D --> FrontHelpers
+    Toolbar --> ColorPicker
+    AppComponent --> FrontHelpers
+  end
+
+  %% --- BACKEND ---
+  subgraph Backend_API["Backend (Node.js/Express/TypeScript)"]
+    IndexTs["index.ts (Express Server)"]
+    Routes["routes.ts (REST API Endpoints)"]
+
+    subgraph Core["core/"]
+      Voxel["voxel.ts (Voxel Type)"]
+      VoxelModel["voxelModel.ts (VoxelModel)"]
+      Compression["compression.ts (RLE/SVO)"]
+    end
+
+    subgraph Exporters["exporters/"]
+      ObjExporter["objExporter.ts"]
+      StlExporter["stlExporter.ts"]
+    end
+
+    subgraph Utils["utils/"]
+      MathUtils["math.ts"]
+    end
+
+    subgraph Scripts["scripts/"]
+      PluginSystem["pluginSystem.ts (Plugins)"]
+    end
+
+    IndexTs --> Routes
+    Routes --> VoxelModel
+    Routes --> Compression
+    Routes --> ObjExporter
+    Routes --> StlExporter
+    Routes --> PluginSystem
+    VoxelModel --> Voxel
+    VoxelModel --> MathUtils
+    Compression --> Voxel
+    ObjExporter --> VoxelModel
+    StlExporter --> VoxelModel
+    PluginSystem --> VoxelModel
+  end
+
+  %% --- DATA EXCHANGE ---
+  Web_Frontend -- "REST API /api/*" --> Backend_API
+  ApiClient -- "HTTP" --> Routes
+  CompressWorker -- "offload compress" --> AppComponent
+
+  %% --- TESTING & ASSETS ---
+  subgraph Tests_and_Public["Testing & Public"]
+    FE_Tests["frontend/tests/ (Canvas3D.test.tsx, ... )"]
+    BE_Tests["backend/tests/ (core.test.ts, ... )"]
+    IndexHtml["frontend/public/index.html"]
+    Assets["(icons, css, etc.)"]
+  end
+  AppComponent -.-> FE_Tests
+  VoxelModel -.-> BE_Tests
+  Web_Frontend -.-> IndexHtml
+  FrontHelpers -.-> Assets
+
+  %% --- RELATIONSHIPS CLARITY ---
+  AppComponent -- "uses" --> UI_Components
+  VoxelModel -- "uses" --> Core
+  Routes -- "calls" --> Core
+  Routes -- "calls" --> Exporters
+  Routes -- "runs" --> Scripts
 ```
 
 ## Reference
