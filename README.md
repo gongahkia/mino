@@ -8,8 +8,8 @@ A minimal Voxel Modeling, Visualization and Animation tool with real-time render
 ## Stack
 
 * *Script*: [Python](https://www.python.org/)
-* *Frontend*: [React](), [TypeScript](), [HTML Canvas API]()
-* *Backend*: [Node.js](), [JavaScript]()
+* *Frontend*: [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [HTML Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+* *Backend*: [Node.js](https://nodejs.org/en), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * *Dependencies*: [Pygame](https://www.pygame.org/news), [NumPy](https://numpy.org/)
 * *Package*: [Docker](https://www.docker.com/)
 * *Test*: [Pytest](https://docs.pytest.org/en/stable/)
