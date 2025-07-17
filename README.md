@@ -1,4 +1,5 @@
 [![](https://img.shields.io/badge/mino_1.0.0-passing-green)](https://github.com/gongahkia/mino/releases/tag/1.0.0)
+[![](https://img.shields.io/badge/mino_2.0.0-passing-light_green)](https://github.com/gongahkia/mino/releases/tag/2.0.0)
 
 # `Mino`
 
@@ -7,19 +8,22 @@ A minimal Voxel Modeling, Visualization and Animation tool with real-time render
 ## Stack
 
 * *Script*: [Python](https://www.python.org/)
+* *Frontend*: []
+* *Backend*: []
 * *Dependencies*: [Pygame](https://www.pygame.org/news), [NumPy](https://numpy.org/)
 * *Package*: [Docker](https://www.docker.com/)
 * *Test*: [Pytest](https://docs.pytest.org/en/stable/)
 
 ## Usage
 
+### CLI
 
-The below instructions are for running `Mino` on your client machine.
+The below instructions are for running `Mino` CLI on your client machine.
 
 1. Execute the below.
 
 ```console
-$ git clone https://github.com/gongahkia/Mino && cd Mino
+$ git clone https://github.com/gongahkia/Mino && cd Mino/cli
 ```
 
 2. Build and run Docker Image for [Production](./Dockerfile).
@@ -41,6 +45,14 @@ $ docker run --rm -it -v $(pwd):/app -p 8000:8000 mino-dev
 ```console
 $ docker build -t mino-dev -f Dockerfile.dev .
 $ docker run --rm -it -v $(pwd):/app mino-dev pytest tests/
+```
+
+### Web App
+
+1. Execute the below.
+
+```console
+$ git clone https://github.com/gongahkia/Mino && cd Mino/web
 ```
 
 ## Architecture
