@@ -3,7 +3,7 @@
 
 # `Mino`
 
-A minimal Voxel Modeling, Visualization and Animation tool with real-time rendering and a scriptable API.
+A minimal Voxel Modeling, Visualization and Animation tool with real-time rendering and a scriptable API, served as a [CLI tool](#cli-1) and [Web App](#web-app-1).
 
 ## Stack
 
@@ -214,10 +214,103 @@ flowchart TD
   UI_Module -.-> Icons
 ```
 
-### Web
+### Web App
 
 ```Mermaid
+flowchart TD
+  %% --- FRONTEND ---
+  subgraph Web_Frontend["Frontend (React/TypeScript)"]
+    AppComponent["App.tsx (Main UI/App State)"]
 
+    subgraph UI_Components["components/"]
+      Canvas3D["Canvas3D.tsx (3D Voxel Viewer)"]
+      ColorPicker["ColorPicker.tsx"]
+      Toolbar["Toolbar.tsx"]
+    end
+
+    subgraph Utilities["utils/"]
+      FrontHelpers["helpers.ts (Color/Helpers)"]
+    end
+
+    subgraph Services["services/"]
+      ApiClient["apiClient.ts (REST Client)"]
+    end
+
+    subgraph Workers["workers/"]
+      CompressWorker["compressionWorker.ts (RLE/SVO Workers)"]
+    end
+
+    AppComponent --> Canvas3D
+    AppComponent --> ColorPicker
+    AppComponent --> Toolbar
+    AppComponent --> ApiClient
+    AppComponent --> CompressWorker
+    Canvas3D --> FrontHelpers
+    Toolbar --> ColorPicker
+    AppComponent --> FrontHelpers
+  end
+
+  %% --- BACKEND ---
+  subgraph Backend_API["Backend (Node.js/Express/TypeScript)"]
+    IndexTs["index.ts (Express Server)"]
+    Routes["routes.ts (REST API Endpoints)"]
+
+    subgraph Core["core/"]
+      Voxel["voxel.ts (Voxel Type)"]
+      VoxelModel["voxelModel.ts (VoxelModel)"]
+      Compression["compression.ts (RLE/SVO)"]
+    end
+
+    subgraph Exporters["exporters/"]
+      ObjExporter["objExporter.ts"]
+      StlExporter["stlExporter.ts"]
+    end
+
+    subgraph Utils["utils/"]
+      MathUtils["math.ts"]
+    end
+
+    subgraph Scripts["scripts/"]
+      PluginSystem["pluginSystem.ts (Plugins)"]
+    end
+
+    IndexTs --> Routes
+    Routes --> VoxelModel
+    Routes --> Compression
+    Routes --> ObjExporter
+    Routes --> StlExporter
+    Routes --> PluginSystem
+    VoxelModel --> Voxel
+    VoxelModel --> MathUtils
+    Compression --> Voxel
+    ObjExporter --> VoxelModel
+    StlExporter --> VoxelModel
+    PluginSystem --> VoxelModel
+  end
+
+  %% --- DATA EXCHANGE ---
+  Web_Frontend -- "REST API /api/*" --> Backend_API
+  ApiClient -- "HTTP" --> Routes
+  CompressWorker -- "offload compress" --> AppComponent
+
+  %% --- TESTING & ASSETS ---
+  subgraph Tests_and_Public["Testing & Public"]
+    FE_Tests["frontend/tests/ (Canvas3D.test.tsx, ... )"]
+    BE_Tests["backend/tests/ (core.test.ts, ... )"]
+    IndexHtml["frontend/public/index.html"]
+    Assets["(icons, css, etc.)"]
+  end
+  AppComponent -.-> FE_Tests
+  VoxelModel -.-> BE_Tests
+  Web_Frontend -.-> IndexHtml
+  FrontHelpers -.-> Assets
+
+  %% --- RELATIONSHIPS CLARITY ---
+  AppComponent -- "uses" --> UI_Components
+  VoxelModel -- "uses" --> Core
+  Routes -- "calls" --> Core
+  Routes -- "calls" --> Exporters
+  Routes -- "runs" --> Scripts
 ```
 
 ## Reference
