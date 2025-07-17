@@ -55,7 +55,11 @@ $ docker run --rm -it -v $(pwd):/app mino-dev pytest tests/
 $ git clone https://github.com/gongahkia/Mino && cd Mino/web
 ```
 
+...
+
 ## Architecture
+
+### CLI
 
 ```mermaid
 flowchart TD
@@ -200,6 +204,12 @@ flowchart TD
 
   MainApp -.-> Icons
   UI_Module -.-> Icons
+```
+
+### Web
+
+```Mermaid
+
 ```
 
 ## Reference
